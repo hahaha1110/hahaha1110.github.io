@@ -71,7 +71,8 @@ XML이나 HTML 같은 문서를 출력할 때, `이스케이핑` 해야하는 �
 
 일반적으로는 freemarker.core.OutputFormat에 HTML, XML, XHTML 등을 설정하거나 text/html, application/xml 같은 MIME 타입을 설정해주면 자동으로 Escaping이 실행되기 때문에 이 디렉티브는 잘 사용하지 않는다.
 
-> 이스케이핑 : 브라우저에 의해 약속된 문자들을 화면에 표시할 수 있음
+> 이스케이핑 : 브라우저에 의해 약속된 문자들을 화면에 표시하도록 하는것
+{: .prompt-info }
 
 ex) 줄바꿈 태그 &lt;br /&gt;을 화면에 표시하는 방법
 
