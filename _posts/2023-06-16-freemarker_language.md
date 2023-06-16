@@ -16,23 +16,78 @@ img_path: /assets/img/20230616/
 
 공식 메뉴얼 페이지 : [Freemarker 메뉴얼](https://freemarker.apache.org/docs/ref.html)
 
-## 문법 정리
+- 프리마커는 자바 서블릿을 위한 `오픈소스 HTML 템플릿 엔진`이다.
+- 프리마커에서는 HTML을 템플릿으로 저장하는데 이들은 결국 템플릿 객체로 컴파일 된다.
+- 이 템플릿 객체들은 서블리셍서 제공하는 데이터들을 이용하여 HTML을 동적으로 생성한다.
+- 프리마커 객체들은 서블릿에서 제공하는 데이터들을 이용하여 HTML을 동적으로 생성한다.
+
+## Freemarker 구조
+
+![freemarker](freemarker.png)
+
+FreeMarker는 표현의 결과물을 HTML(템플릿)로 관리하고 여기에 자바 객체를 연결하여 최종적인 결과를 만들어낸다.
+
+## FreeMarker 셋팅
+
+- 다운로드 : [http://www.freemarker.org/freemarkerdownload.html](http://www.freemarker.org/freemarkerdownload.html)
+
+- 설치
+
+1. freemarker.jar 파일을 WEB-INF/lib 안에 넣는다.
+2. ecilpse에서는 프로젝트 마다 lib안에 import 시킨다.
+3. Java 코딩 시
+
+```java
+import freemarker.template.*;
+```
+
+## Freemarker 문법
+
+자세한 것은 [메뉴얼](http://www.freemarker.org/docs/) 참조.
+
+### ftl tag
+
+```ftl
+<# >
+```
+
+### 주석
+
+```ftl
+<#--주석달기-->
+```
 
 ### assign
 
 프리마커 템플릿에서 `변수`를 사용하고 싶을 때, `assign` 디렉티브를 사용할 수 있다.
 
 ```ftl
-<#assign name="Dave">
+<#assign x=0> <#-- x값을 출력하고자 할때 --> ${x}  -->
 
 <#assign codeBlock>
      this code block assigned
 </#assign>
 ```
 
-라고 명시하면 그 다음부터 `${name}`을 이용하면 `"Dave"`라는 값이 찍히게 된다.
+라고 명시하면 그 다음부터 `${name}`을 이용하면 `"Dave"`라는 값이 찍히게 된다. 혹은 <#assign>과 </#assign> 사이에 있는 코드 블럭을 변수처럼 할당해서 사용할 수도 있다.
 
-혹은 <#assign>과 </#assign> 사이에 있는 코드 블럭을 변수처럼 할당해서 사용할 수도 있다.
+- 형식을 함께 선언할 때 (int 형으로 선언)
+
+```ftl
+<#assign x=0 ? int>
+```
+
+- 다른 변수를 정의 하고 싶을 때
+
+```ftl
+<#setting [새로]=[기존]>
+```
+
+- 사이즈를 알고 싶을 때 key 값이 list인 경우
+
+```ftl
+<#assign size=list?size>
+```
 
 ### attempt, recover
 
@@ -240,13 +295,19 @@ include 디렉티브에는 옵션을 줄 수도 있다.
 
 데이터 모델의 <b>자식 노드들을 순회하는 반복문</b>과 관련된 디렉티브들이다.
 
+1. 가장 간단한 형태의 반복문이다.
+
+```ftl
+<#list [Object code에서 key값 ] as [별칭할 값]>
+```
+
+ex)
+
 ```ftl
 <#list sequence as item>
     list block here
 </#list>
 ```
-
-가장 간단한 형태의 반복문이다.
 
 `sequence` 라는 이름의 `컬렉션 데이터`의 각 항목들을 순회하는 코드로 `list` 블럭 내부에서 각 아이템 항목을 `item` 이라는 `변수`로 접근할 수 있다.
 
@@ -298,6 +359,15 @@ list 디렉티브로 순회 할 대상이 없는 경우, 즉 sequence에 해당�
 
 list 디렉티브를 <b>시작하기 전과 후에 실행할 내용</b>을 표현하고 싶은 경우 <b>items 디렉티브를 list 디렉티브 안쪽에</b> 사용하는 식으로 쓰면 된다.
 
+2. for문 사용
+
+```ftl
+for(int i=0;i<10;i++)
+<#list  1..10  as i >
+      ${i}
+<#assign i=i+1?int>
+```
+
 ### seq
 
 List 디렉티브 내부에서 사용할 수 있는 디렉티브 중에 seq 디렉티브가 있다.
@@ -343,6 +413,15 @@ capture this
 ### macro, nested, return
 
 `매크로(macro)` 변수를 생성한다.
+
+주로 변하지 않는 변수를 생성할 때 사용
+
+- 간단한 예시
+
+```ftl
+<#macro green> <#-- 매크로 선언-->
+<@green>  <#-- 사용-->
+```
 
 `매크로`는 `템플릿 파일의 조각`으로 `사용자 정의 디렉티브(User-defined directive)`로 사용될 수 있다.
 
@@ -548,8 +627,103 @@ visit 디렉티브에 의해서 사용자 정의 디렉티브가 찾아진다.
 
 같은 이름의 매크로를 오버라이드해서 사용하는 경우 적당한 처리를 위해서 사용할 수 있다.
 
+## Freemarker 예제
+
+### TLD 파일
+
+- fmtag.tld (WEB-INF 아래 위치)
+
+```xml
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE taglib
+      PUBLIC "-Sun Microsystems, Inc.//DTD JSP Tag Library 1.1//EN"
+      "http://java.sun.com/j2ee/dtds/web-jsptaglib_1_1.dtd">
+<taglib>
+  <tlibversion>2.0<.tlibversion>
+  <jspversion>1.1</jspversion>
+  <shortname>FreeMarker JSP Support</shortname>
+
+  <tag>
+   <name>template</name>
+   <tagclass>freemarker.ext.jsp.FreemarkerTag</tagclass>
+   <bodycontent>tagdependent</bodycontent>
+   <info>Allow evaluation of FreeMarker templates inside JSP</info>
+   <attribute>
+    <name>cashing</name>
+    <required>false</required>
+   </attribute>
+  </tag>
+</taglib>
+```
+
+### java 파일
+
+- SimpleBean.java (WEB-INF/classes/freemarker/examples/jsp)
+- Custom Tag 수행을 위한 Tag Handler Class
+
+```java
+package freemarker.examples.jsp;
+
+public class SimpleBean
+{
+  private static String[] arr = {"a","b","c","d"};
+  private String theString = "Hello from " + toString();
+
+  public void setString(String foo)
+  {
+    theString = foo;
+  }
+
+  public String getString()
+  {
+    return theString;
+  }
+
+  public String[] getArray()
+  {
+    return arr;
+  }
+}
+```
+
+### jsp 파일
+
+- freemarker2.jsp (View 파일)
+
+```jsp
+<%@ page contentType="text/html; charset=euc-kr" %>
+<%@ taglib uri="/WEB-INF/fmtag.tld" prefix="fm" %>
+
+<jsp:useBean id="mybean" class="freemarker.examples.jsp.SimpleBean"/>
+<jsp:useBean id="mybeanreq" class="freemarker.examples.jsp.SimpleBean" scope="request" />
+
+<fm:template>
+<html>
+<body>
+ <h1>FreeMarker JSP example</h1>
+ <hr>
+ <p>JSP 페이지</p>
+
+ <#assign mybean = page.mybean>
+ <#assign mybeanreq = request.mybeanreq>
+
+ <p>page : ${mybean.string}
+ <#list mybean.array as item>
+  <br>${item}
+ </#list>
+
+ <p><b>Note:</b>
+</body>
+</html>
+</fm.template>
+```
+
 출처 :
 
 - [[Freemarker] 프리마커 템플릿 언어 문법(FTL;Freemarker Template Language) 문법](https://soft.plusblog.co.kr/99)
 
-- [이스케이핑](https://www.opentutorials.org/module/2/2824)
+- [https://www.opentutorials.org/module/2/2824](https://www.opentutorials.org/module/2/2824)
+
+- [http://wiki.gurubee.net/pages/viewpage.action?pageId=1343682&](http://wiki.gurubee.net/pages/viewpage.action?pageId=1343682&)
+
+- [ http://blog.naver.com/singing4u?Redirect=Log&logNo=30011135160](http://blog.naver.com/singing4u?Redirect=Log&logNo=30011135160)
