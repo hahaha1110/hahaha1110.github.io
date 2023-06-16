@@ -5,7 +5,7 @@ date: 2023-06-16 16:30:00 +0900
 categories: [개발, 기타]
 tags: [Freemarker, ftl, html, 템플릿]
 render_with_liquid: false
-img_path: /assets/img/20230615/
+img_path: /assets/img/20230616/
 ---
 
 ## Freemarker란?
@@ -72,7 +72,7 @@ XML이나 HTML 같은 문서를 출력할 때, `이스케이핑` 해야하는 �
 일반적으로는 freemarker.core.OutputFormat에 HTML, XML, XHTML 등을 설정하거나 text/html, application/xml 같은 MIME 타입을 설정해주면 자동으로 Escaping이 실행되기 때문에 이 디렉티브는 잘 사용하지 않는다.
 
 > 이스케이핑 : 브라우저에 의해 약속된 문자들을 화면에 표시하도록 하는것
-{: .prompt-info }
+> {: .prompt-info }
 
 ex) 줄바꿈 태그 &lt;br /&gt;을 화면에 표시하는 방법
 
@@ -85,9 +85,15 @@ ex) 줄바꿈 태그 &lt;br /&gt;을 화면에 표시하는 방법
 </html>
 ```
 
+참고로 Auto Escaping 기능이 활성화 되지 않은 상황에서 하나의 Interpolation을 Escaping 하려면 `"?esc"`를 붙여주면 된다.
+
+```ftl
+${expression?esc}
+```
+
 ### compress
 
-출력 결과에서 불필요한 공백문자(White-space)를 제거하는데 사용된다.
+출력 결과에서 불필요한 `공백문자(White-space)`를 제거하는데 사용된다.
 
 ```ftl
 <#compress>
@@ -95,7 +101,7 @@ ex) 줄바꿈 태그 &lt;br /&gt;을 화면에 표시하는 방법
 </#compress>
 ```
 
-HTML이나 XML같이 공백 문자가 주요하게 사용되는 경우 사용자 데이터에서 불필요한 공백문자를 지울 필요가 있는데, 이 때 '#compress' 디렉티브를 상용하면 된다.
+HTML이나 XML같이 공백 문자가 주요하게 사용되는 경우 사용자 데이터에서 불필요한 공백문자를 지울 필요가 있는데, 이 때 `'#compress'` 디렉티브를 상용하면 된다.
 
 `#compress` 블럭 내에서 2개 이상의 공백 문자가 반복해서 등장하는 경우를 감지해서 하나의 공백문자로 줄여준다. 줄바꿈 문자도 여러개가 등장하면 하나로 줄여준다. 맨 처음과 맨 마지막에 등장하는 공백과 줄바꿈 문자들은 제거된다.
 
@@ -435,9 +441,11 @@ i / 2 = ${third}
 </#outputformat>
 ```
 
-`formatname`으로는 `"HTML"`, `"XML"` 등이 사용될 수 있다.
+`formatname`으로는 `"HTML"`, `"XML"` 등이 사용될 수 있다. [outputformat 참조](https://freemarker.apache.org/docs/dgui_misc_autoescaping.html#topic.predefinedOutputFormats)
 
-`outputformat` 참조 output 포맷을 적절하게 설정하면, 그 포맷에서 사용하는 <b>특수 문자들을 자동으로 이스케이핑</b> 해준다.
+![buildSucess](outputStream.png)
+
+output 포맷을 적절하게 설정하면, 그 포맷에서 사용하는 <b>특수 문자들을 자동으로 이스케이핑</b> 해준다.
 
 outputformat 디렉티브가 끝나면, 이전에 설정되었던 outputformat으로 자동 복구된다.
 
@@ -453,7 +461,7 @@ outputformat 디렉티브가 끝나면, 이전에 설정되었던 outputformat�
 
 예를 들어, 이 디렉티브로 locale, number_format, boolean_format, date_format 등을 변경하게 되면, 이 후에 프리마커 엔진이 데이터를 처리할 때마다 여기에서 바꾼 설정값에 따라 움직이게 된다.
 
-setting 디렉티브로 변경할 수 있는 설정값은 매뉴얼을 참조하도록 하자.
+setting 디렉티브로 변경할 수 있는 설정값은 [매뉴얼](https://freemarker.apache.org/docs/ref_directive_setting.html)을 참조하도록 하자.
 
 ### stop
 
