@@ -73,6 +73,8 @@ ${item.name[OSF:1..5]}
 
 `NULL`체크 함수. `if_exists`는 `<#if` 지시자 없이도 사용할 수 있게 해주는 표현식이다.
 
+> ?? : 물음표(?) \*2 로 간단하게 표현할수도 있다.
+
 - 형식 : `오브젝트?exists`
 
 - 샘플1)
@@ -96,6 +98,8 @@ ${ENTITY.username?if_exists}
 ### ?default
 
 `NULL`값을 대체해주는 함수
+
+> !"" : 느낌표(!)와 " " 로 간단하게 표한가능하다.
 
 - 형식 : `오브젝트?default(디폴트값)`
 
@@ -166,9 +170,9 @@ ${LIST_POINTS[OSF:item.gid?number].entityname?default("")}
 
 - 샘플1)
 
-문자열 <img src='/image/enterprise.gif'>을 js_string으로 처리했을때 소스보기를 하면
+문자열 `<img src='/image/enterprise.gif'>`을 js_string으로 처리했을때 소스보기를 하면
 
-<img src=\'/image/enterprise.gif\'>으로 출력된다.
+`<img src=\'/image/enterprise.gif\'>`으로 출력된다.
 
 - 샘플2)
 
