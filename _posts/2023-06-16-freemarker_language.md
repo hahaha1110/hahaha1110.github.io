@@ -192,9 +192,9 @@ ${LIST_POINTS[OSF:item.gid?number].entityname?default("")}
 
 - 샘플1)
 
-문자열 <img src='/image/enterprise.gif'>을 html로 처리하면
+문자열 &lt;img src='/image/enterprise.gif'&gt;을 html로 처리하면
 
-화면상에 <img src='/image/enterprise.gif'> 로 출력되고
+화면상에 &lt;img src='/image/enterprise.gif'&gt; 로 출력되고
 
 소스보기를 하면 &lt;img src='/image/enterprise.gif'&gt;로 출력된다.
 
