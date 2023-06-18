@@ -170,9 +170,9 @@ ${LIST_POINTS[OSF:item.gid?number].entityname?default("")}
 
 - 샘플1)
 
-문자열 `<img src='/image/enterprise.gif'>`을 js_string으로 처리했을때 소스보기를 하면
+문자열 &lt;img src='/image/enterprise.gif'&gt; 을 js_string으로 처리했을때 소스보기를 하면
 
-`<img src=\'/image/enterprise.gif\'>`으로 출력된다.
+&lt;img src=\'/image/enterprise.gif\'&gt; 으로 출력된다.
 
 - 샘플2)
 
