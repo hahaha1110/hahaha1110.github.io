@@ -2,7 +2,7 @@
 title: 프리마커 템플릿 언어 (FTL;Freemarker Template Language) - 2
 author: ha
 date: 2023-06-19 14:30:00 +0900
-categories: [Language, 기타]
+categories: [Language, Freemarker]
 tags: [Language, Freemarker, ftl, html, 템플릿]
 render_with_liquid: false
 img_path: /assets/img/20230616/
