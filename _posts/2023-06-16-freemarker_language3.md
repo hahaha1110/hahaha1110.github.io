@@ -1,5 +1,5 @@
 ---
-title: 프리마커 템플릿 언어 (FTL;Freemarker Template Language) - 3
+title: 프리마커 템플릿 언어 - 3
 author: ha
 date: 2023-06-16 14:35:00 +0900
 categories: [Language, Freemarker]
