@@ -2,8 +2,8 @@
 title: 깃허브(github) 블로그 만들기 (+23.06.15 오류 수정)
 author: ha
 date: 2023-06-14 15:30:00 +0900
-categories: [개발, Git]
-tags: [Git]
+categories: [VCS, Git]
+tags: [VCS, Git]
 render_with_liquid: false
 img_path: /assets/img/20230614/
 ---
