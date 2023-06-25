@@ -8,7 +8,7 @@ render_with_liquid: false
 img_path: /assets/img/20230625/
 ---
 
-1. Ctrl + , 혹은 파일 > 기본설정 > 설정
+1. `Ctrl + ,` 혹은 `파일 > 기본설정 > 설정`
 
 ![setting](setting.png)
 
