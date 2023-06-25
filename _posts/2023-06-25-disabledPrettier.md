@@ -9,9 +9,7 @@ img_path: /assets/img/20230625/
 ---
 
 1. `Ctrl + ,` 혹은 `파일 > 기본설정 > 설정`
-
-![setting](setting.png)
+   ![setting](setting.png)
 
 2. `Format on Save` 검색 후 체크 해제
-
-![setting2](setting2.png)
+   ![setting2](setting2.png)
