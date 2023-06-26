@@ -6,6 +6,7 @@ categories: [Language, Freemarker]
 tags: [Language, Freemarker, ftl, html, 템플릿]
 render_with_liquid: false
 img_path: /assets/img/20230616/
+image: thumb.jpg
 ---
 
 ## Freemarker 예제

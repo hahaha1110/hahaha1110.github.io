@@ -6,6 +6,7 @@ categories: [VCS, Git]
 tags: [VCS, Git]
 render_with_liquid: false
 img_path: /assets/img/20230614/
+image: thumb.png
 ---
 
 ## 환경 구성
