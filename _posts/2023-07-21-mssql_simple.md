@@ -1,11 +1,12 @@
 ---
-title: mssql 쿼리 정리
+title: MSSQL 쿼리 정리
 author: ha
 date: 2023-07-21 15:30:00 +0900
 categories: [SQL, MSSQL]
 tags: [SQL, MSSQL]
 render_with_liquid: false
-img_path: /assets/img/20230629/
+img_path: /assets/img/20230721/
+image: thumb1.png
 ---
 
 ### 날짜 출력 마음대로 요리하기!!
