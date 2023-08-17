@@ -37,6 +37,30 @@ SELECT DATE_FORMAT(NOW(),'%Y-%m-%d') AS DATE FROM DUAL
 +-------------+
 ```
 
+- 형태: HH:MI:SS , HHMISS(HH:MI:SS로부터 콜론(:)을 제거)
+
+```sql
+
+-- 콜론 붙은채로
+select date_format(NOW(), '%H:%i:%s') as CREATE_TM;
+
++-------------+
+|  CREATE_TM  |
++-------------+
+|  12:05:06   |
++-------------+
+
+-- 콜론 제거
+SELECT REPLACE(DATE_FORMAT(NOW(), '%H:%i:%s'), ':', '') AS CREATE_TM;
+
++-------------+
+|  CREATE_TM  |
++-------------+
+|  120506     |
++-------------+
+
+```
+
 - 형태: 2016 September 22
 
 ```sql
