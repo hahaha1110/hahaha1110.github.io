@@ -92,6 +92,19 @@ GO
 SELECT dbo.Function_lpad(seqno+1,3,'0') from cusapp
 ```
 
+- 오라클 LPAD(seq.nextval) MSSQL으로 변환했던 방법.. 컬럼 max값+1(참고,,)
+
+```sql
+
+-- 오라클
+SELECT LPAD(SEQ_TESTSEQ.NEXTVAL, 8, 0) FROM DUAL;
+
+-- mssql
+SELECT RIGHT('00000000' + CAST(ISNULL(MAX(CAST(SUBSTRING(TEST_COLUMN, 3, LEN(TEST_COLUMN)) AS INT)), 0) + 1 AS VARCHAR(8)), 8) AS TEST_COLUMN
+FROM TEST_TABLE;
+
+```
+
 ### 마지막 시퀀스 가져오는 법
 
 ```sql
